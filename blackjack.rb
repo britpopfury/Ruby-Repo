@@ -69,6 +69,34 @@ dealers_hand << deck.pop
 players_hand << deck.pop
 dealers_hand << deck.pop
 
+# create tally method that keeps track of each players score
+# the hand currently looks like this:
+# ["8", "Clubs"] , ["5", "Spades"]
+def tally(cards)
+  total = cards.map{|e| e[1]}  #gets the second element of the nexted array (cos arrays are zero indexed)
+  running_total = 0  #initialise this at the beginning
+  transient_total = 0
+# need to iterate through each value to get the total from our new hand_total array
+total.each do |value|
+  if value == 'J' || 'Q' || 'K'
+    running_total += 10
+  elsif value = 'A' 
+    transient_total = running_total += 10
+    if transient_total > 21
+      running_total += 1
+    end
+  end
+end
+
+
+
+player_total = 0
+dealer total = 0
+
+
+
+
+puts "So, I just dealt your initial hand and here it is:"
 puts "Player\'s hand is:  #{players_hand[0]} and #{players_hand[1]}"
 puts "Dealer\'s hand is:  #{dealers_hand[0]} and #{dealers_hand[1]}"
 puts "" #empty line for readability
@@ -78,11 +106,17 @@ puts ""
 puts "Enter T for Twist or S for Stick"
 puts "" #empty line for readability
 response = gets.chomp.upcase
-
-while response != 'T' || 'S'
+# make sure they don't enter something stupid
+while response != 'T' && 'S'
 	puts "Plese enter T for Twist or S for Stick"
 	response = gets.chomp.upcase
 end
+
+if response = 'S'
+  puts "Your hand is currently  #{players_hand[0]} and #{players_hand[1]}"
+  puts "Let\'s see what the deal has"
+  puts "Dealer\'s hand is:  #{dealers_hand[0]} and #{dealers_hand[1]}"
+
 
 
 
